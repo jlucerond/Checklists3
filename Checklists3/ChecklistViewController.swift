@@ -6,7 +6,7 @@
 //  Copyright © 2016 Joe Lucero. All rights reserved.
 //
 
-// MVC: this branch goes pages 33-59
+// MVC: this branch goes pages 59-70
 
 import UIKit
 
@@ -54,6 +54,20 @@ class ChecklistViewController: UITableViewController {
         
         super.init(coder: aDecoder)
     }
+    
+    @IBAction func addItem() {
+        let newIndexRow = items.count
+        
+        let newItem = ChecklistItem()
+        newItem.text = "new row"
+        newItem.checked = false
+        newItem.toggleChecked()
+        items.append(newItem)
+        
+        let newIndexPath = IndexPath(row: newIndexRow, section: 0)
+        let newIndexPaths = [newIndexPath]
+        tableView.insertRows(at: newIndexPaths, with: .automatic)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +86,8 @@ class ChecklistViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ChecklistItem",
+                                                 for: indexPath)
         
         let item = items[indexPath.row]
         
@@ -91,6 +106,15 @@ class ChecklistViewController: UITableViewController {
             configureCheckmark(for: cell, with: item)
         }
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView,
+                            commit editingStyle: UITableViewCellEditingStyle,
+                            forRowAt indexPath: IndexPath) {
+        items.remove(at: indexPath.row)
+        
+        let indexPaths = [indexPath]
+        tableView.deleteRows(at: indexPaths, with: .automatic)
     }
 
     func configureCheckmark(for cell: UITableViewCell,
