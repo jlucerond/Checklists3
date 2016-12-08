@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D800EF7C1DF8D7FA00A11AC3 /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D800EF7B1DF8D7FA00A11AC3 /* ChecklistItem.swift */; };
 		D889BCC01DD3C5CA0000B4B9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889BCBF1DD3C5CA0000B4B9 /* AppDelegate.swift */; };
 		D889BCC21DD3C5CA0000B4B9 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D889BCC11DD3C5CA0000B4B9 /* ChecklistViewController.swift */; };
 		D889BCC51DD3C5CA0000B4B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D889BCC31DD3C5CA0000B4B9 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D800EF7B1DF8D7FA00A11AC3 /* ChecklistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
 		D889BCBC1DD3C5CA0000B4B9 /* Checklists3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checklists3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D889BCBF1DD3C5CA0000B4B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D889BCC11DD3C5CA0000B4B9 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				D889BCBF1DD3C5CA0000B4B9 /* AppDelegate.swift */,
 				D889BCC11DD3C5CA0000B4B9 /* ChecklistViewController.swift */,
+				D800EF7B1DF8D7FA00A11AC3 /* ChecklistItem.swift */,
 				D889BCC31DD3C5CA0000B4B9 /* Main.storyboard */,
 				D889BCC61DD3C5CA0000B4B9 /* Assets.xcassets */,
 				D889BCC81DD3C5CA0000B4B9 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D889BCC21DD3C5CA0000B4B9 /* ChecklistViewController.swift in Sources */,
+				D800EF7C1DF8D7FA00A11AC3 /* ChecklistItem.swift in Sources */,
 				D889BCC01DD3C5CA0000B4B9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +304,7 @@
 				D889BCD01DD3C5CA0000B4B9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
