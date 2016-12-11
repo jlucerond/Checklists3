@@ -6,11 +6,11 @@
 //  Copyright © 2016 Joe Lucero. All rights reserved.
 //
 
-// MVC: this branch goes pages 59-70
+// The Add Item Screen: this branch goes pages 70-109
 
 import UIKit
 
-class ChecklistViewController: UITableViewController {
+class ChecklistViewController: UITableViewController, AddItemViewControllerDelegate {
     
     var items : [ChecklistItem]
     
@@ -55,19 +55,27 @@ class ChecklistViewController: UITableViewController {
         super.init(coder: aDecoder)
     }
     
-    @IBAction func addItem() {
-        let newIndexRow = items.count
-        
-        let newItem = ChecklistItem()
-        newItem.text = "new row"
-        newItem.checked = false
-        newItem.toggleChecked()
-        items.append(newItem)
-        
-        let newIndexPath = IndexPath(row: newIndexRow, section: 0)
-        let newIndexPaths = [newIndexPath]
-        tableView.insertRows(at: newIndexPaths, with: .automatic)
+    //AddItemViewControllerDelegate Protocols
+    
+    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+        dismiss(animated: true, completion: nil)
     }
+    
+    func addItemViewController(_ controller: AddItemViewController,
+                               didFinishAdding item: ChecklistItem) {
+        
+        let newRowIndex = items.count
+        items.append(item)
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexPaths = [indexPath]
+        tableView.insertRows(at: indexPaths, with: .automatic)
+        
+        dismiss(animated: true, completion: nil)
+    }
+
+    
+    // Other Functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,9 +124,19 @@ class ChecklistViewController: UITableViewController {
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddItem" {
+            let navigationController = segue.destination as! UINavigationController
+            
+            let controller = navigationController.topViewController as! AddItemViewController
+            
+            controller.delegate = self
+        }
+    }
 
     func configureCheckmark(for cell: UITableViewCell,
-                            with item: ChecklistItem){
+                            with item: ChecklistItem) {
         if item.checked {
             cell.accessoryType = .checkmark
         } else {
@@ -127,7 +145,7 @@ class ChecklistViewController: UITableViewController {
     }
     
     func configureText(for cell: UITableViewCell,
-                       with item: ChecklistItem){
+                       with item: ChecklistItem) {
         let label = cell.viewWithTag(1000) as! UILabel
         label.text = item.text
     }
