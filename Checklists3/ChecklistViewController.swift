@@ -6,7 +6,7 @@
 //  Copyright © 2016 Joe Lucero. All rights reserved.
 //
 
-// Editing existing checlist items: this branch goes pages 109-126
+// Saving and loading the checklist items: this branch goes pages 126-145
 
 import UIKit
 
