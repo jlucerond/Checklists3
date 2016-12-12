@@ -13,19 +13,19 @@
 		D889BCC51DD3C5CA0000B4B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D889BCC31DD3C5CA0000B4B9 /* Main.storyboard */; };
 		D889BCC71DD3C5CA0000B4B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D889BCC61DD3C5CA0000B4B9 /* Assets.xcassets */; };
 		D889BCCA1DD3C5CA0000B4B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D889BCC81DD3C5CA0000B4B9 /* LaunchScreen.storyboard */; };
-		D89D6F241DFA0D37005C7B85 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89D6F231DFA0D37005C7B85 /* AddItemViewController.swift */; };
+		D89D6F241DFA0D37005C7B85 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89D6F231DFA0D37005C7B85 /* ItemDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D800EF7B1DF8D7FA00A11AC3 /* ChecklistItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
 		D889BCBC1DD3C5CA0000B4B9 /* Checklists3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checklists3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D889BCBF1DD3C5CA0000B4B9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D889BCC11DD3C5CA0000B4B9 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
+		D889BCC11DD3C5CA0000B4B9 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ChecklistViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		D889BCC41DD3C5CA0000B4B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D889BCC61DD3C5CA0000B4B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D889BCC91DD3C5CA0000B4B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D889BCCB1DD3C5CA0000B4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D89D6F231DFA0D37005C7B85 /* AddItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		D89D6F231DFA0D37005C7B85 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +61,7 @@
 				D889BCBF1DD3C5CA0000B4B9 /* AppDelegate.swift */,
 				D889BCC11DD3C5CA0000B4B9 /* ChecklistViewController.swift */,
 				D800EF7B1DF8D7FA00A11AC3 /* ChecklistItem.swift */,
-				D89D6F231DFA0D37005C7B85 /* AddItemViewController.swift */,
+				D89D6F231DFA0D37005C7B85 /* ItemDetailViewController.swift */,
 				D889BCC31DD3C5CA0000B4B9 /* Main.storyboard */,
 				D889BCC61DD3C5CA0000B4B9 /* Assets.xcassets */,
 				D889BCC81DD3C5CA0000B4B9 /* LaunchScreen.storyboard */,
@@ -144,7 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D889BCC21DD3C5CA0000B4B9 /* ChecklistViewController.swift in Sources */,
-				D89D6F241DFA0D37005C7B85 /* AddItemViewController.swift in Sources */,
+				D89D6F241DFA0D37005C7B85 /* ItemDetailViewController.swift in Sources */,
 				D800EF7C1DF8D7FA00A11AC3 /* ChecklistItem.swift in Sources */,
 				D889BCC01DD3C5CA0000B4B9 /* AppDelegate.swift in Sources */,
 			);
