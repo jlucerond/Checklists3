@@ -6,7 +6,7 @@
 //  Copyright © 2016 Joe Lucero. All rights reserved.
 //
 
-// Saving and loading the checklist items: pages 126-145
+// Multiple checklists: pages 146-170
 
 import UIKit
 
