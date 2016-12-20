@@ -14,6 +14,9 @@
 		D889BCC71DD3C5CA0000B4B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D889BCC61DD3C5CA0000B4B9 /* Assets.xcassets */; };
 		D889BCCA1DD3C5CA0000B4B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D889BCC81DD3C5CA0000B4B9 /* LaunchScreen.storyboard */; };
 		D89D6F241DFA0D37005C7B85 /* ItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89D6F231DFA0D37005C7B85 /* ItemDetailViewController.swift */; };
+		D8B545B41E08830400815619 /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B545B31E08830400815619 /* AllListsViewController.swift */; };
+		D8B545B61E08909600815619 /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B545B51E08909600815619 /* Checklist.swift */; };
+		D8B545B81E089B9B00815619 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8B545B71E089B9B00815619 /* ListDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		D889BCC91DD3C5CA0000B4B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D889BCCB1DD3C5CA0000B4B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D89D6F231DFA0D37005C7B85 /* ItemDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ItemDetailViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		D8B545B31E08830400815619 /* AllListsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AllListsViewController.swift; path = ../AllListsViewController.swift; sourceTree = "<group>"; };
+		D8B545B51E08909600815619 /* Checklist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
+		D8B545B71E089B9B00815619 /* ListDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,9 +65,12 @@
 			isa = PBXGroup;
 			children = (
 				D889BCBF1DD3C5CA0000B4B9 /* AppDelegate.swift */,
+				D8B545B31E08830400815619 /* AllListsViewController.swift */,
+				D8B545B71E089B9B00815619 /* ListDetailViewController.swift */,
 				D889BCC11DD3C5CA0000B4B9 /* ChecklistViewController.swift */,
-				D800EF7B1DF8D7FA00A11AC3 /* ChecklistItem.swift */,
 				D89D6F231DFA0D37005C7B85 /* ItemDetailViewController.swift */,
+				D8B545B51E08909600815619 /* Checklist.swift */,
+				D800EF7B1DF8D7FA00A11AC3 /* ChecklistItem.swift */,
 				D889BCC31DD3C5CA0000B4B9 /* Main.storyboard */,
 				D889BCC61DD3C5CA0000B4B9 /* Assets.xcassets */,
 				D889BCC81DD3C5CA0000B4B9 /* LaunchScreen.storyboard */,
@@ -97,7 +106,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Joe Lucero";
 				TargetAttributes = {
 					D889BCBB1DD3C5C60000B4B9 = {
@@ -144,8 +153,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D889BCC21DD3C5CA0000B4B9 /* ChecklistViewController.swift in Sources */,
+				D8B545B81E089B9B00815619 /* ListDetailViewController.swift in Sources */,
 				D89D6F241DFA0D37005C7B85 /* ItemDetailViewController.swift in Sources */,
+				D8B545B61E08909600815619 /* Checklist.swift in Sources */,
 				D800EF7C1DF8D7FA00A11AC3 /* ChecklistItem.swift in Sources */,
+				D8B545B41E08830400815619 /* AllListsViewController.swift in Sources */,
 				D889BCC01DD3C5CA0000B4B9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +202,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -239,6 +252,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

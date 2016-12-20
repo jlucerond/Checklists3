@@ -6,13 +6,14 @@
 //  Copyright © 2016 Joe Lucero. All rights reserved.
 //
 
-// Saving and loading the checklist items: pages 126-145
+// Multiple checklists: pages 146-170
 
 import UIKit
 
 class ChecklistViewController: UITableViewController, ItemDetailViewControllerDelegate {
     
     var items : [ChecklistItem]
+    var checklist: Checklist!
     
     required init?(coder aDecoder: NSCoder) {
         items = [ChecklistItem]()
@@ -58,7 +59,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        title = checklist.name
     }
 
     override func didReceiveMemoryWarning() {
