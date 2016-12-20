@@ -75,7 +75,13 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     override func tableView(_ tableView: UITableView,
                             accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let navigationController = storyboard?.instantiateViewController(withIdentifier: "ListDetailNavigationController")
+        let navigationController = storyboard!.instantiateViewController(withIdentifier: "ListDetailNavigationController") as! UINavigationController
+        let controller = navigationController.topViewController as! ListDetailViewController
+        
+        controller.delegate = self
+        controller.checklistToEdit = lists[indexPath.row]
+        
+        present(navigationController, animated: true, completion: nil)
     }
     
     // MARK: - ListDetailViewControllerDelegate Protocol
