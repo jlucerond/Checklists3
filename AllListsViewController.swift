@@ -8,15 +8,31 @@
 
 import UIKit
 
-class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate {
-    
+class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
     
     // MARK: - Variables
     var dataModel: DataModel!
     
     // MARK: - View Controller Methods
+    
     override func viewDidLoad() {
+        print("1 View Did Load")
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("2 View Did Appear")
+        super.viewDidAppear(animated)
+        
+        navigationController?.delegate = self
+
+        let index = dataModel.indexOfSelectedChecklist
+        print("Index is: \(index)")
+        if  index != -1 && index < dataModel.lists.count {
+            let checklist = dataModel.lists[index]
+            performSegue(withIdentifier: "ShowChecklist", sender: checklist)
+            print("3 Will perform a segue since I'm loading an old checklist")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +59,9 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
+        print("Changing the ChecklistIndex to indexPath#\(indexPath)")
+        dataModel.indexOfSelectedChecklist = indexPath.row
+        
         let checklist = dataModel.lists[indexPath.row]
         performSegue(withIdentifier: "ShowChecklist", sender: checklist)
     }
@@ -94,6 +113,18 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
             }
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - UINavigationControllerDelegate Protocol
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              willShow viewController: UIViewController,
+                              animated: Bool) {
+        print("4 navigationController willShow animated")
+        if viewController === self {
+            dataModel.indexOfSelectedChecklist = -1
+            print("Changing the ChecklistIndex back to -1")
+        }
     }
     
     // MARK: - Navigation
