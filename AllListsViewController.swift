@@ -20,6 +20,11 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         print("2 View Did Appear")
         super.viewDidAppear(animated)
@@ -53,6 +58,9 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         let checklist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = checklist.name
         cell.accessoryType = .detailDisclosureButton
+        
+        // input new function here w/ 1 parameter- checklist
+        cell.detailTextLabel!.text = titleForDetailTextLabel(checklist)
         
         return cell
     }
@@ -146,8 +154,18 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifer) {
             return cell
         } else {
-            return UITableViewCell(style: .default,
+            return UITableViewCell(style: .subtitle,
                                        reuseIdentifier: cellIdentifer)
+        }
+    }
+    
+    func titleForDetailTextLabel(_ checklist: Checklist) -> String {
+        if checklist.items.count == 0 {
+            return "(No Items)"
+        } else if checklist.numberOfUncheckedItems == 0 {
+            return "All done!"
+        } else {
+            return "\(checklist.numberOfUncheckedItems) Remaining"
         }
     }
     
