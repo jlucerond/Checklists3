@@ -8,32 +8,31 @@
 
 import UIKit
 
-class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate {
+class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
     
-    var lists: [Checklist]
+    // MARK: - Variables
+    var dataModel: DataModel!
     
-    // MARK: - Initializer Methods
-        required init?(coder aDecoder: NSCoder) {
-        lists = [Checklist]()
-        
-        super.init(coder: aDecoder)
-        
-        var list = Checklist(name: "Birthdays")
-        lists.append(list)
-        
-        list = Checklist(name: "Groceries")
-        lists.append(list)
-        
-        list = Checklist(name: "Apps")
-        lists.append(list)
-        
-        list = Checklist(name: "Work Stuff")
-        lists.append(list)
-    }
-
     // MARK: - View Controller Methods
-        override func viewDidLoad() {
+    
+    override func viewDidLoad() {
+        print("1 View Did Load")
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("2 View Did Appear")
+        super.viewDidAppear(animated)
+        
+        navigationController?.delegate = self
+
+        let index = dataModel.indexOfSelectedChecklist
+        print("Index is: \(index)")
+        if  index != -1 && index < dataModel.lists.count {
+            let checklist = dataModel.lists[index]
+            performSegue(withIdentifier: "ShowChecklist", sender: checklist)
+            print("3 Will perform a segue since I'm loading an old checklist")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -44,14 +43,14 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     // MARK: - Table view data source & delegate methods
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return lists.count
+        return dataModel.lists.count
     }
 
     override func tableView(_ tableView: UITableView,
                             cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = makeCell(for: tableView)
         
-        let checklist = lists[indexPath.row]
+        let checklist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = checklist.name
         cell.accessoryType = .detailDisclosureButton
         
@@ -60,14 +59,17 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
-        let checklist = lists[indexPath.row]
+        print("Changing the ChecklistIndex to indexPath#\(indexPath)")
+        dataModel.indexOfSelectedChecklist = indexPath.row
+        
+        let checklist = dataModel.lists[indexPath.row]
         performSegue(withIdentifier: "ShowChecklist", sender: checklist)
     }
     
     override func tableView(_ tableView: UITableView,
                             commit editingStyle: UITableViewCellEditingStyle,
                             forRowAt indexPath: IndexPath) {
-        lists.remove(at: indexPath.row)
+        dataModel.lists.remove(at: indexPath.row)
         
         let indexPaths = [indexPath]
         tableView.deleteRows(at: indexPaths, with: .automatic)
@@ -79,7 +81,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         let controller = navigationController.topViewController as! ListDetailViewController
         
         controller.delegate = self
-        controller.checklistToEdit = lists[indexPath.row]
+        controller.checklistToEdit = dataModel.lists[indexPath.row]
         
         present(navigationController, animated: true, completion: nil)
     }
@@ -92,8 +94,8 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     func listDetailViewController(_ controller: ListDetailViewController,
                                   didFinishAdding checklist: Checklist){
-        let newRowIndex = lists.count
-        lists.append(checklist)
+        let newRowIndex = dataModel.lists.count
+        dataModel.lists.append(checklist)
         
         let indexPath = IndexPath(row: newRowIndex, section: 0)
         let indexPaths = [indexPath]
@@ -104,13 +106,25 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     
     func listDetailViewController(_ controller: ListDetailViewController,
                                   didFinishEditing checklist: Checklist){
-        if let index = lists.index(of: checklist) {
+        if let index = dataModel.lists.index(of: checklist) {
             let indexPath = IndexPath(row: index, section: 0)
             if let cell = tableView.cellForRow(at: indexPath){
                 cell.textLabel!.text = checklist.name
             }
         }
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - UINavigationControllerDelegate Protocol
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              willShow viewController: UIViewController,
+                              animated: Bool) {
+        print("4 navigationController willShow animated")
+        if viewController === self {
+            dataModel.indexOfSelectedChecklist = -1
+            print("Changing the ChecklistIndex back to -1")
+        }
     }
     
     // MARK: - Navigation
@@ -136,5 +150,5 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
                                        reuseIdentifier: cellIdentifer)
         }
     }
-
+    
 }
