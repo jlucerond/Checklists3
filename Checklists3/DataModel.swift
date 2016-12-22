@@ -23,7 +23,6 @@ class DataModel {
     
     // MARK: - Initializer
     init() {
-        print(dataFilePath())
         loadChecklists()
         registerDefaults()
         handleFirstTime()
