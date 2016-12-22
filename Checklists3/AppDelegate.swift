@@ -6,7 +6,7 @@
 //  Copyright © 2016 Joe Lucero. All rights reserved.
 //
 
-// Putting to-do items into the checklists: pages 170-190
+// Improving the user experience: pages 202-233
 
 import UIKit
 

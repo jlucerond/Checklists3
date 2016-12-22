@@ -14,24 +14,24 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     var dataModel: DataModel!
     
     // MARK: - View Controller Methods
-    
     override func viewDidLoad() {
-        print("1 View Did Load")
         super.viewDidLoad()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
-        print("2 View Did Appear")
         super.viewDidAppear(animated)
         
         navigationController?.delegate = self
 
         let index = dataModel.indexOfSelectedChecklist
-        print("Index is: \(index)")
         if  index != -1 && index < dataModel.lists.count {
             let checklist = dataModel.lists[index]
             performSegue(withIdentifier: "ShowChecklist", sender: checklist)
-            print("3 Will perform a segue since I'm loading an old checklist")
         }
     }
 
@@ -53,13 +53,14 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         let checklist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = checklist.name
         cell.accessoryType = .detailDisclosureButton
+        cell.imageView!.image = UIImage(named: checklist.iconName)
+        cell.detailTextLabel!.text = titleForDetailTextLabel(checklist)
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
-        print("Changing the ChecklistIndex to indexPath#\(indexPath)")
         dataModel.indexOfSelectedChecklist = indexPath.row
         
         let checklist = dataModel.lists[indexPath.row]
@@ -87,43 +88,31 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
     
     // MARK: - ListDetailViewControllerDelegate Protocol
-    
     func listDetailViewControllerDidCancel(_ controller: ListDetailViewController) {
         dismiss(animated: true, completion: nil)
     }
     
     func listDetailViewController(_ controller: ListDetailViewController,
                                   didFinishAdding checklist: Checklist){
-        let newRowIndex = dataModel.lists.count
         dataModel.lists.append(checklist)
-        
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths, with: .automatic)
-        
+        dataModel.sortChecklists()
+        tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
     
     func listDetailViewController(_ controller: ListDetailViewController,
                                   didFinishEditing checklist: Checklist){
-        if let index = dataModel.lists.index(of: checklist) {
-            let indexPath = IndexPath(row: index, section: 0)
-            if let cell = tableView.cellForRow(at: indexPath){
-                cell.textLabel!.text = checklist.name
-            }
-        }
+        dataModel.sortChecklists()
+        tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
     
     // MARK: - UINavigationControllerDelegate Protocol
-    
     func navigationController(_ navigationController: UINavigationController,
                               willShow viewController: UIViewController,
                               animated: Bool) {
-        print("4 navigationController willShow animated")
         if viewController === self {
             dataModel.indexOfSelectedChecklist = -1
-            print("Changing the ChecklistIndex back to -1")
         }
     }
     
@@ -146,8 +135,18 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifer) {
             return cell
         } else {
-            return UITableViewCell(style: .default,
+            return UITableViewCell(style: .subtitle,
                                        reuseIdentifier: cellIdentifer)
+        }
+    }
+    
+    func titleForDetailTextLabel(_ checklist: Checklist) -> String {
+        if checklist.items.count == 0 {
+            return "(No Items)"
+        } else if checklist.numberOfUncheckedItems == 0 {
+            return "All done!"
+        } else {
+            return "\(checklist.numberOfUncheckedItems) Remaining"
         }
     }
     
