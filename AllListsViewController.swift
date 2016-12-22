@@ -53,8 +53,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         let checklist = dataModel.lists[indexPath.row]
         cell.textLabel!.text = checklist.name
         cell.accessoryType = .detailDisclosureButton
-        
-        // input new function here w/ 1 parameter- checklist
+        cell.imageView!.image = UIImage(named: checklist.iconName)
         cell.detailTextLabel!.text = titleForDetailTextLabel(checklist)
         
         return cell

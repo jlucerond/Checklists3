@@ -32,4 +32,14 @@ class ChecklistItem: NSObject, NSCoding {
     override init() {
         super.init()
     }
+    
+    init(textForItem: String, checked: Bool) {
+        self.text = textForItem
+        self.checked = checked
+        super.init()
+    }
+    
+    convenience init(textForItem: String) {
+        self.init(textForItem: textForItem, checked: false)
+    }
 }
