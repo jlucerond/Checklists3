@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import UserNotifications
 
 protocol ItemDetailViewControllerDelegate: class {
     func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController)
@@ -44,6 +45,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             item.text = textField.text!
             item.shouldRemind = shouldRemindSwitch.isOn
             item.dueDate = dueDate
+            item.scheduleNotification()
             
             delegate?.itemDetailViewController(self,
                                             didFinishEditing: item)
@@ -51,6 +53,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
             let item = ChecklistItem(textForItem: textField.text!)
             item.shouldRemind = shouldRemindSwitch.isOn
             item.dueDate = dueDate
+            item.scheduleNotification()
             
             delegate?.itemDetailViewController(self,
                                             didFinishAdding: item)
@@ -60,6 +63,17 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func dateChanged(_ datePicker: UIDatePicker) {
         dueDate = datePicker.date
         updateDueDateLabel()
+    }
+    
+    @IBAction func shouldRemindToggled(_ sender: UISwitch) {
+        textField.resignFirstResponder()
+        
+        if sender.isOn {
+            let center = UNUserNotificationCenter.current()
+            center.requestAuthorization(options: [.alert, .sound]){
+                granted, error in /* do nothing */
+            }
+        }
     }
     
     // MARK: - View Controller Functions

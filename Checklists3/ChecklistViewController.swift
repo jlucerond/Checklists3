@@ -13,7 +13,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     var checklist: Checklist!
     
     // MARK: - ItemDetailViewControllerDelegate Protocols
-    
     func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController) {
         dismiss(animated: true, completion: nil)
     }
@@ -45,7 +44,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     
     
     // MARK: - Other Functions
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = checklist.name
@@ -57,7 +55,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     }
     
     // MARK: - Tableview Functions
-    
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
         return checklist.items.count
@@ -97,7 +94,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     }
     
     // MARK: - Segue Functions
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddItem" {
             let navigationController = segue.destination as! UINavigationController
@@ -117,7 +113,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     }
     
     // MARK: - Configuring Labels Functions
-    
     func configureCheckmark(for cell: UITableViewCell,
                             with item: ChecklistItem) {
         let label = cell.viewWithTag(1001) as! UILabel
