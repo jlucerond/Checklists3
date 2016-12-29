@@ -60,8 +60,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("Received local notification \(notification)")
+        
+        presentUIAlertOnScreen(notification: notification)
+        
     }
+    
+    func presentUIAlertOnScreen(notification: UNNotification) {
+        print("Received local notification \(notification)")
+        
+        let myRequest = notification.request
+        let myContent = myRequest.content
+        let myText = myContent.body
+        
+        let alert = UIAlertController(title: "Reminder:", message: "\(myText)", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(action)
+        
+        let navigationController = window!.rootViewController as! UINavigationController
+        
+        if let screen = navigationController.visibleViewController {
+            screen.present(alert, animated: true, completion: nil)
+            return
+        } else {
+            print("not able to send a UIAlert")
+        }
+        
+    }
+
 
 }
 

@@ -12,7 +12,6 @@ import UserNotifications
 class ChecklistItem: NSObject, NSCoding {
     
     // MARK: - Variables
-
     var text = ""
     var checked = false
     var dueDate = Date()
@@ -24,7 +23,6 @@ class ChecklistItem: NSObject, NSCoding {
     }
     
     // MARK: - NSCoding Protocols
-    
     func encode(with aCoder: NSCoder) {
         aCoder.encode(text, forKey: "Text")
         aCoder.encode(checked, forKey: "Checked")

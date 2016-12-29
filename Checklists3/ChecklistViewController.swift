@@ -11,6 +11,7 @@ import UIKit
 class ChecklistViewController: UITableViewController, ItemDetailViewControllerDelegate {
     
     var checklist: Checklist!
+    var dataModel: DataModel!
     
     // MARK: - ItemDetailViewControllerDelegate Protocols
     func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController) {
@@ -18,27 +19,18 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     }
     
     func itemDetailViewController(_ controller: ItemDetailViewController,
-                               didFinishAdding item: ChecklistItem) {
-        
-        let newRowIndex = checklist.items.count
+                                  didFinishAdding item: ChecklistItem) {
         checklist.items.append(item)
-        
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        let indexPaths = [indexPath]
-        tableView.insertRows(at: indexPaths, with: .automatic)
+        dataModel.sortChecklists()
+        tableView.reloadData()
         
         dismiss(animated: true, completion: nil)
     }
-
+    
     func itemDetailViewController(_ controller: ItemDetailViewController,
-                               didFinishEditing item: ChecklistItem) {
-        
-        if let index = checklist.items.index(of: item){
-        let indexPath = IndexPath(row: index, section: 0)
-            if let cell = tableView.cellForRow(at: indexPath) {
-                configureText(for: cell, with: item)
-            }
-        }
+                                  didFinishEditing item: ChecklistItem) {
+        dataModel.sortChecklists()
+        tableView.reloadData()
         dismiss(animated: true, completion: nil)
     }
     
@@ -47,6 +39,11 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
         title = checklist.name
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -126,7 +123,14 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     func configureText(for cell: UITableViewCell,
                        with item: ChecklistItem) {
         let label = cell.viewWithTag(1000) as! UILabel
-        label.text = "\(item.itemID) : \(item.text)"
+        label.text = item.text
+        
+        let dueDateLabel = cell.viewWithTag(1002) as! UILabel
+        
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        dueDateLabel.text = formatter.string(from: item.dueDate)
     }
   
 }
